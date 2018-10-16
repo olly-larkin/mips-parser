@@ -7,6 +7,7 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl << "Please enter 'y' to use console entry (any character for file): ";
 	std::string ans;
 	std::cin >> ans;
+	std::cout << std::endl;
 
 	std::vector< std::vector<std::string> > commVector;
 
@@ -29,12 +30,4 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::cout << "Application read in successfully." << std::endl;
-
-	for(int i = 0; i < commVector.size(); ++i) {
-		for(int j = 0; j < commVector[i].size(); ++j) {
-			std::cout << commVector[i][j] << " ";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
 }
