@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
-void add(std::vector<std::string> argVec);
+uint32_t add(const std::vector<std::string>& argVec, const std::map<std::string, unsigned char>& regMap, const std::map<std::string, unsigned int>& labelMap);
 
 #endif // INSTRUCTIONLIST_HPP
