@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "instructionList.hpp"
+#include <string>
 
 std::map<std::string, numFn> commMap = {
     {"add", {3, add}}
@@ -58,7 +59,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
             inComm.pop_back();
             labelMap[inComm] = count;
         } else if (commMap.find(inComm) == commMap.end())
-            exitError("Invalid command.");
+            exitError("Invalid command: " + inComm);
         else {
             std::vector<std::string> inVec;
             inVec.push_back(inComm);
