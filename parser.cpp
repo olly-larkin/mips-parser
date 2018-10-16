@@ -43,7 +43,7 @@ std::map<std::string, unsigned char> regMap = {
 
 std::map<std::string, unsigned int> labelMap;
 
-void vecPparser(std::istream& inStream, std::vector< std::vector<std::string> > commVector) {
+void vecParser(std::istream& inStream, std::vector< std::vector<std::string> > commVector) {
     std::string inComm;
     unsigned int count = 0x10000000;
 
