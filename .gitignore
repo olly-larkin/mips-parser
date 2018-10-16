@@ -1,2 +1,6 @@
 instructionList.o
 bin/parser
+main.o
+parser.o
+.DS_store
+bin/.DS_store
