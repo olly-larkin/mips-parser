@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-typedef void (*commandFn)(std::vector<std::string>);
+typedef void (*commandFn)(std::vector<std::string> argVec);
 
 struct numFn {
     int numArgs;

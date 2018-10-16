@@ -3,8 +3,11 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include "instructionList.hpp"
 
-std::map<std::string, numFn> commMap;
+std::map<std::string, numFn> commMap = {
+    {"add", {3, add}}
+};
 
 std::map<std::string, unsigned char> regMap = {
     {"$zero", 0},
@@ -49,12 +52,12 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> > c
 
     while(inComm != "terminate") {
         inStream >> inComm;
-
         if (inComm == "terminate")
             break;
-        else if (inComm.back() == ':')
+        else if (inComm.back() == ':') {
+            inComm.pop_back();
             labelMap[inComm] = count;
-        else if (commMap.find(inComm) == commMap.end())
+        } else if (commMap.find(inComm) == commMap.end())
             exitError("Invalid command.");
         else {
             std::vector<std::string> inVec;
