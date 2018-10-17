@@ -118,6 +118,24 @@ uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned i
     return returnNum & 0x3FF003F;
 }
 
+uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = 16;
+    std::vector<int> index = {1};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11);
+    return returnNum & 0xF83F;
+}
+
+uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = 18;
+    std::vector<int> index = {1};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11);
+    return returnNum & 0xF83F;
+}
+
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
     uint32_t returnNum = ((2 << 26) & 0xFC000000);
     uint32_t addr;

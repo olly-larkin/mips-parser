@@ -17,6 +17,9 @@ uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsig
 uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
 uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
 uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
+uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
+uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
+
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
 
 #endif // INSTRUCTIONLIST_HPP
