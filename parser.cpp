@@ -11,6 +11,7 @@ std::map<std::string, numFn> commMap = {
     {"addu", {3, addu}},
     {"and", {3, and_instr}},
     {"jr", {1, jr}},
+    {"div", {2, div_instr}},
     {"j", {1, j}}
 };
 
