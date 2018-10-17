@@ -30,4 +30,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::cout << "Application read in successfully." << std::endl;
+
+	std::cout << "Please enter an output file name: ";
+	std::string outFileName;
+	std::cin >> outFileName;
+	std::ofstream outFile(outFileName, std::ios::binary | std::ios::out | std::ios::beg);
+	binGen(outFile, commVector);
+
+	std::cout << "Output file generated: " << outFileName << std::endl << std::endl;
 }

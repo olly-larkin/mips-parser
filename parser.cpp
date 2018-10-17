@@ -10,41 +10,6 @@ std::map<std::string, numFn> commMap = {
     {"add", {3, add}}
 };
 
-std::map<std::string, unsigned char> regMap = {
-    {"$zero", 0},
-    {"$at", 1},
-    {"$v0", 2},
-    {"$v1", 3},
-    {"$a0", 4},
-    {"$a1", 5},
-    {"$a2", 6},
-    {"$a3", 7},
-    {"$t0", 8},
-    {"$t1", 9},
-    {"$t2", 10},
-    {"$t3", 11},
-    {"$t4", 12},
-    {"$t5", 13},
-    {"$t6", 14},
-    {"$t7", 15},
-    {"$s0", 16},
-    {"$s1", 17},
-    {"$s2", 18},
-    {"$s3", 19},
-    {"$s4", 20},
-    {"$s5", 21},
-    {"$s6", 22},
-    {"$s7", 23},
-    {"$t8", 24},
-    {"$t9", 25},
-    {"$k0", 26},
-    {"$k1", 27},
-    {"$gp", 28},
-    {"$sp", 29},
-    {"$fp", 30},
-    {"$ra", 31}
-};
-
 std::map<std::string, unsigned int> labelMap;
 
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
@@ -74,7 +39,18 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
     }
 }
 
-void exitError(std::string errMsg, int code) {
-    std::cerr << errMsg << std::endl << std::endl;
-    std::exit(code);
+void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector) {
+    for(int i = 0; i < commVector.size(); ++i) {
+        char memBlock[4];
+        uint32_t val = commMap[commVector[i][0]].fn(commVector[i], labelMap);
+        fillMem(memBlock, val);
+        outStream.write(memBlock, 4);
+    }
+}
+
+void fillMem(char memBlock[4], uint32_t num) {
+    memBlock[0] = ((num >> 24) & 0xFF);
+    memBlock[1] = ((num >> 16) & 0xFF);
+    memBlock[2] = ((num >> 8) & 0xFF);
+    memBlock[3] = (num & 0xFF);
 }

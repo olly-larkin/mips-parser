@@ -5,6 +5,9 @@
 #include <vector>
 #include <map>
 
-uint32_t add(const std::vector<std::string>& argVec, const std::map<std::string, unsigned char>& regMap, const std::map<std::string, unsigned int>& labelMap);
+void exitError(std::string errMsg, int code = 0);
+std::string giveStr(std::vector<std::string> strVec);
+bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index);
+uint32_t add(std::vector<std::string>& argVec, const std::map<std::string, unsigned int>& labelMap);
 
 #endif // INSTRUCTIONLIST_HPP
