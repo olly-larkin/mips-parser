@@ -2,6 +2,7 @@
 #include <fstream>
 #include "parser.hpp"
 #include <vector>
+#include <string>
 
 int main(int argc, char* argv[]) {
 	std::cout << std::endl << "Please enter 'y' to use console entry (any character for file): ";
