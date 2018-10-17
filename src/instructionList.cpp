@@ -203,6 +203,14 @@ uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsign
     return returnNum & 0x3FFF83F;
 }
 
+uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    uint32_t returnNum = 4;
+    std::vector<int> index = {1,2,3};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[1]] & 0x1F) << 16) | ((regMap[argVec[1]] & 0x1F) << 21);
+    return returnNum & 0x3FFF83F;
+
 
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i){
     uint32_t returnNum =((8 << 26) & 0xFC000000),imm = 0;
