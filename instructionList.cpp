@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-std::map<std::string, unsigned char> regMap = {
+std::map<std::string, uint32_t> regMap = {
     {"$zero", 0},
     {"$at", 1},
     {"$v0", 2},
@@ -56,17 +56,17 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
     for(int i = 0; i < index.size(); ++i) {
         if (argVec[index[i]].back() == ',')
             argVec[index[i]].pop_back();
-        //if ()
+        if (regMap.find(argVec[index[i]]) == regMap.end())
+            return false;
     }
     return true;
 }
 
 uint32_t add(std::vector<std::string>& argVec, const std::map<std::string, unsigned int>& labelMap) {
     uint32_t returnNum = 32;
-
     std::vector<int> index = {1,2,3};
     if (!regCheck(argVec, index))
-        exitError("Invalid command: " + giveStr(argVec));
-
-    return returnNum;
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
+    return returnNum & 0x3FFF83F;
 }

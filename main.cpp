@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 		inFile.close();
 	}
 
-	std::cout << "Application read in successfully." << std::endl;
+	std::cout << std::endl << "Commands passed successfully." << std::endl << std::endl;
 
 	std::cout << "Please enter an output file name: ";
 	std::string outFileName;
