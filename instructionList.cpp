@@ -62,11 +62,25 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
     return true;
 }
 
-uint32_t add(std::vector<std::string>& argVec, const std::map<std::string, unsigned int>& labelMap) {
+uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
     uint32_t returnNum = 32;
     std::vector<int> index = {1,2,3};
     if (!regCheck(argVec, index))
         exitError("Invalid register input: " + giveStr(argVec));
     returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
     return returnNum & 0x3FFF83F;
+}
+
+uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = ((2 << 26) & 0xFC000000);
+    uint32_t addr;
+    if (labelMap.find(argVec[1]) == labelMap.end()) {
+        std::size_t strCheck = 0;
+        addr = std::stoi(argVec[1], &strCheck);
+        if (strCheck != argVec[1].length())
+            exitError("Invalid address: " + giveStr(argVec));
+    } else
+        addr = labelMap[argVec[1]];
+
+    return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }

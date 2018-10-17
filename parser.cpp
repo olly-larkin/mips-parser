@@ -7,7 +7,8 @@
 #include <string>
 
 std::map<std::string, numFn> commMap = {
-    {"add", {3, add}}
+    {"add", {3, add}},
+    {"j", {1, j}}
 };
 
 std::map<std::string, unsigned int> labelMap;
