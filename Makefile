@@ -1,14 +1,14 @@
 parser: main.o parser.o instructionList.o
-	g++ main.o parser.o instructionList.o -o bin/parser
+	g++ src/main.o src/parser.o src/instructionList.o -o bin/parser
 
-main.o: main.cpp
-	g++ --std=c++11 -c main.cpp
+main.o: src/main.cpp
+	g++ --std=c++11 -c src/main.cpp -o src/main.o
 
-parser.o: parser.cpp parser.hpp
-	g++ --std=c++11 -c parser.cpp
+parser.o: src/parser.cpp src/parser.hpp
+	g++ --std=c++11 -c src/parser.cpp -o src/parser.o
 
-instructionList.o: instructionList.cpp instructionList.hpp
-	g++ --std=c++11 -c instructionList.cpp
+instructionList.o: src/instructionList.cpp src/instructionList.hpp
+	g++ --std=c++11 -c src/instructionList.cpp -o src/instructionList.o
 
 clean:
-	rm *.o bin/parser
+	rm src/*.o bin/parser

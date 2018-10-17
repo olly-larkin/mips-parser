@@ -1,7 +1,7 @@
-instructionList.o
+src/instructionList.o
 bin/parser
-main.o
-parser.o
+src/main.o
+src/parser.o
 .DS_store
 bin/.DS_store
 mips.bin
