@@ -8,6 +8,9 @@
 
 std::map<std::string, numFn> commMap = {
     {"add", {3, add}},
+    {"addu", {3, addu}},
+    {"and", {3, and_instr}},
+    {"jr", {1, jr}},
     {"j", {1, j}}
 };
 

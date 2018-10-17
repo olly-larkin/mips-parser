@@ -62,6 +62,8 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
     return true;
 }
 
+//***************************** INSTRUCTIONS ***********************************
+
 uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
     uint32_t returnNum = 32;
     std::vector<int> index = {1,2,3};
@@ -69,6 +71,33 @@ uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned in
         exitError("Invalid register input: " + giveStr(argVec));
     returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
     return returnNum & 0x3FFF83F;
+}
+
+uint32_t addu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = 33;
+    std::vector<int> index = {1,2,3};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
+    return returnNum & 0x3FFF83F;
+}
+
+uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = 36;
+    std::vector<int> index = {1,2,3};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
+    return returnNum & 0x3FFF83F;
+}
+
+uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
+    uint32_t returnNum = 8;
+    std::vector<int> index = {1};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input: " + giveStr(argVec));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21);
+    return returnNum & 0x3E0003F;
 }
 
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap) {
