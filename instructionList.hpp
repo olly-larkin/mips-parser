@@ -20,6 +20,8 @@ uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned i
 uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 uint32_t mult(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
+uint32_t multu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
+uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 

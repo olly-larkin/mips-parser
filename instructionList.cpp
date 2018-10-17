@@ -36,7 +36,39 @@ std::map<std::string, uint32_t> regMap = {
     {"$gp", 28},
     {"$sp", 29},
     {"$fp", 30},
-    {"$ra", 31}
+    {"$ra", 31},
+    {"$0", 0},
+    {"$1", 1},
+    {"$2", 2},
+    {"$3", 3},
+    {"$4", 4},
+    {"$5", 5},
+    {"$6", 6},
+    {"$7", 7},
+    {"$8", 8},
+    {"$9", 9},
+    {"$10", 10},
+    {"$11", 11},
+    {"$12", 12},
+    {"$13", 13},
+    {"$14", 14},
+    {"$15", 15},
+    {"$16", 16},
+    {"$17", 17},
+    {"$18", 18},
+    {"$19", 19},
+    {"$20", 20},
+    {"$21", 21},
+    {"$22", 22},
+    {"$23", 23},
+    {"$24", 24},
+    {"$25", 25},
+    {"$26", 26},
+    {"$27", 27},
+    {"$28", 28},
+    {"$29", 29},
+    {"$30", 30},
+    {"$31", 31}
 };
 
 void exitError(std::string errMsg, int code) {
@@ -143,6 +175,24 @@ uint32_t mult(std::vector<std::string>& argVec, std::map<std::string, unsigned i
         exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
     returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
     return returnNum & 0x3FF003F;
+}
+
+uint32_t multu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    uint32_t returnNum = 25;
+    std::vector<int> index = {1,2};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
+    return returnNum & 0x3FF003F;
+}
+
+uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    uint32_t returnNum = 37;
+    std::vector<int> index = {1,2,3};
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
+    return returnNum & 0x3FFF83F;
 }
 
 
