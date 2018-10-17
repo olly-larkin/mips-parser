@@ -12,6 +12,7 @@ std::map<std::string, numFn> commMap = {
     {"and", {3, and_instr}},
     {"jr", {1, jr}},
     {"div", {2, div_instr}},
+    {"divu", {2, divu}},
     {"j", {1, j}}
 };
 
