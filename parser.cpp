@@ -15,6 +15,8 @@ std::map<std::string, numFn> commMap = {
     {"divu", {2, divu}},
     {"mfhi", {1, mfhi}},
     {"mflo", {1, mflo}},
+    {"mult", {2, mult}},
+    
 
     {"j", {1, j}}
 };
@@ -33,7 +35,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
             inComm.pop_back();
             labelMap[inComm] = count;
         } else if (commMap.find(inComm) == commMap.end())
-            exitError("Invalid command: " + inComm);
+            exitError("Invalid command \"" + inComm + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
         else {
             std::vector<std::string> inVec;
             inVec.push_back(inComm);
@@ -51,7 +53,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector) {
     for(int i = 0; i < commVector.size(); ++i) {
         char memBlock[4];
-        uint32_t val = commMap[commVector[i][0]].fn(commVector[i], labelMap);
+        uint32_t val = commMap[commVector[i][0]].fn(commVector[i], labelMap, i);
         fillMem(memBlock, val);
         outStream.write(memBlock, 4);
     }

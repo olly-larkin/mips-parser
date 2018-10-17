@@ -6,3 +6,4 @@ parser.o
 bin/.DS_store
 mips.bin
 .vscode/settings.json
+testFile.txt

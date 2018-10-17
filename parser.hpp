@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 
-typedef uint32_t (*commandFn)(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap);
+typedef uint32_t (*commandFn)(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
 struct numFn {
     int numArgs;

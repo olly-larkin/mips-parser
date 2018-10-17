@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 	} else {
 		std::ifstream inFile;
 		while(!inFile.is_open()) {
-			std::cout << "Please enter a name for your input file: " << std::endl;
+			std::cout << "Please enter a name for your input file: ";
 			std::string inFileName;
 			std::cin >> inFileName;
 			inFile.open(inFileName);
