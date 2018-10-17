@@ -5,3 +5,4 @@ parser.o
 .DS_store
 bin/.DS_store
 mips.bin
+.vscode/settings.json
