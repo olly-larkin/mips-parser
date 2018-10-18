@@ -11,7 +11,7 @@ enum OP_TYPE {
     $d,
     shAmt,
     imm,
-    regmem
+    regMem
 };
 
 void exitError(std::string errMsg, int code = 0);
@@ -20,6 +20,7 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index);
 bool validIntStr(std::string arg, int32_t& returnVal);
 uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int i);
 uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int op, int i, bool branch = false);
+bool regMemSeperator(std::string str, int& offset, int& reg);
 
 //***************************** INSTRUCTIONS ***********************************
 

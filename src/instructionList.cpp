@@ -162,11 +162,32 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             case $s:
                 returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 21);
                 break;
+            case regMem:
+                int offset, reg;
+                if (!regMemSeperator(argVec[i+1], offset, reg))
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                returnNum = returnNum | (offset & 0xFFFF) | ((reg & 0x1F) << 21);
+                break;
             default:
                 break;
         }
     }
     return returnNum;
+}
+
+bool regMemSeperator(std::string str, int& offset, int& reg) {
+    std::size_t index;
+    offset = std::stoi(str, &index, 0);
+    if (index == 0 || str[index] != '(')
+        return false;
+    str.pop_back();
+    std::string regStr;
+    for(int i = index+1; i < str.size(); ++i)
+        regStr += str[i];
+    if (regMap.find(regStr) == regMap.end())
+        return false;
+    reg = regMap[regStr];
+    return true;
 }
 
 //***************************** INSTRUCTIONS ***********************************
