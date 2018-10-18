@@ -38,6 +38,13 @@ std::map<std::string, numFn> commMap = {
     {"bgtz", {2, bgtz}},
     {"blez", {2, blez}},
     {"bltz", {2, bltz}},
+    {"bltzal", {2,bltzal}},
+    {"bne", {3, bne}},
+    {"ori", {3,ori}},
+    {"slti", {3,slti}},
+    {"sltiu", {3,sltiu}},
+    {"xori", {3,xori}},
+    
 
     {"j", {1, j}},
     {"jal", {1, jal}}

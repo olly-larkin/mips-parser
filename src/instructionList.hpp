@@ -53,6 +53,12 @@ uint32_t bgez(std::vector<std::string>& argVec, int i);
 uint32_t bgtz(std::vector<std::string>& argVec, int i);
 uint32_t blez(std::vector<std::string>& argVec, int i);
 uint32_t bltz(std::vector<std::string>& argVec, int i);
+uint32_t bltzal(std::vector<std::string>& argVec, int i);
+uint32_t bne(std::vector<std::string>& argVec, int i);
+uint32_t ori(std::vector<std::string>& argVec, int i);
+uint32_t slti(std::vector<std::string>& argVec, int i);
+uint32_t sltiu(std::vector<std::string>& argVec, int i);
+uint32_t xori(std::vector<std::string>& argVec, int i);
 
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);

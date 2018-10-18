@@ -296,7 +296,7 @@ uint32_t andi(std::vector<std::string>& argVec, int i){
 }
 
 uint32_t beq(std::vector<std::string>& argVec, int i) {
-    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    std::vector<OP_TYPE> opcodes = {$s, $t, imm};
     return I_TYPE(argVec, opcodes, 4, i, true);
 }
 
@@ -325,6 +325,35 @@ uint32_t bltz(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 1, i, true);
 }
 
+uint32_t bltzal(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, imm};
+    return I_TYPE(argVec, opcodes, 1, i, true) | (16 << 16);
+}
+
+uint32_t bne(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, $t, imm};
+    return I_TYPE(argVec, opcodes, 5, i, true);
+}
+
+uint32_t ori(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 13, i);
+}
+
+uint32_t slti(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 10, i);
+}
+
+uint32_t sltiu(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 11, i);
+}
+
+uint32_t xori(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 14, i);
+}
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
