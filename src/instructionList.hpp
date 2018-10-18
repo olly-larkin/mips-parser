@@ -62,6 +62,15 @@ uint32_t slti(std::vector<std::string>& argVec, int i);
 uint32_t sltiu(std::vector<std::string>& argVec, int i);
 uint32_t xori(std::vector<std::string>& argVec, int i);
 uint32_t lb(std::vector<std::string>& argVec, int i);
+uint32_t lbu(std::vector<std::string>& argVec, int i);
+uint32_t lh(std::vector<std::string>& argVec, int i);
+uint32_t lhu(std::vector<std::string>& argVec, int i);
+uint32_t lui(std::vector<std::string>& argVec, int i);
+uint32_t lw(std::vector<std::string>& argVec, int i);
+uint32_t lwl(std::vector<std::string>& argVec, int i);
+uint32_t lwr(std::vector<std::string>& argVec, int i);
+uint32_t sb(std::vector<std::string>& argVec, int i);
+uint32_t sh(std::vector<std::string>& argVec, int i);
 
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);
