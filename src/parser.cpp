@@ -37,7 +37,7 @@ std::map<std::string, numFn> commMap = {
     {"bgez", {2,bgez}},
     {"bgtz", {2, bgtz}},
     {"blez", {2, blez}},
-    
+    {"bltz", {2, bltz}},
 
     {"j", {1, j}},
     {"jal", {1, jal}}

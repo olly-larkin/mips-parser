@@ -320,6 +320,11 @@ uint32_t blez(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 6, i, true);
 }
 
+uint32_t bltz(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, imm};
+    return I_TYPE(argVec, opcodes, 1, i, true);
+}
+
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
