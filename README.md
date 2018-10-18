@@ -35,5 +35,8 @@ A78A0000
 
 (It is left as an exercise to prove that this is the correct binary)  
 
+Footnote
+--------
+
 Pretty sure at the moment that "jr $zero" is how the binaries should terminate but will update if this isn't the case.  
 Sorry if there are any bugs, raise an issue or just come tell us thx.
