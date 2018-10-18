@@ -225,6 +225,11 @@ uint32_t srl(std::vector<std::string>& argVec, std::map<std::string, unsigned in
     return R_TYPE(argVec, opcodes, 2, i);
 }
 
+uint32_t srlv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, $s};
+    return R_TYPE(argVec, opcodes, 6, i);
+}
+
 //*********************************** I TYPE ************************************
 
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
