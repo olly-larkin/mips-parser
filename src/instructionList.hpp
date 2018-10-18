@@ -5,10 +5,18 @@
 #include <vector>
 #include <map>
 
+enum OP_TYPE {
+    $s,
+    $t,
+    $d,
+    shAmt,
+    imm
+};
+
 void exitError(std::string errMsg, int code = 0);
 std::string giveStr(std::vector<std::string> strVec);
 bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index);
-bool validIntStr(std::string arg, uint32_t& returnVal);
+bool validIntStr(std::string arg, int32_t& returnVal);
 
 //***************************** INSTRUCTIONS ***********************************
 
