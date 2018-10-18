@@ -375,6 +375,12 @@ uint32_t xori(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$t, $s, imm};
     return I_TYPE(argVec, opcodes, 14, i);
 }
+
+uint32_t lb(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 32, i);
+}
+
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
