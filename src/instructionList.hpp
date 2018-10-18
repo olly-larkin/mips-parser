@@ -50,6 +50,8 @@ uint32_t andi(std::vector<std::string>& argVec, int i);
 uint32_t beq(std::vector<std::string>& argVec, int i);
 uint32_t bgezal(std::vector<std::string>& argVec, int i);
 uint32_t bgez(std::vector<std::string>& argVec, int i);
+uint32_t bgtz(std::vector<std::string>& argVec, int i);
+uint32_t blez(std::vector<std::string>& argVec, int i);
 
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);

@@ -305,9 +305,19 @@ uint32_t bgezal(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 1, i, true) | (17 << 16);
 }
 
-uint32_t bgez(std::vector<std::string>& argVec, int i){
-    std::vector<OP_TYPE> opcodes = {$t, imm};
-    return I_TYPE(argVec, opcodes, 1, i) | (1 << 16);
+uint32_t bgez(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, imm};
+    return I_TYPE(argVec, opcodes, 1, i, true) | (1 << 16);
+}
+
+uint32_t bgtz(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, imm};
+    return I_TYPE(argVec, opcodes, 7, i, true);
+}
+
+uint32_t blez(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, imm};
+    return I_TYPE(argVec, opcodes, 6, i, true);
 }
 
 //*********************************** J TYPE ************************************
