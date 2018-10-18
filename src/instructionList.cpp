@@ -138,6 +138,8 @@ uint32_t R_TYPE(std::vector<std::string>& argVec, std::vector<OP_TYPE> opcodes, 
 
 //***************************** INSTRUCTIONS ***********************************
 
+//*********************************** R TYPE ************************************
+
 uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 32, i);
@@ -193,12 +195,27 @@ uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsign
     return R_TYPE(argVec, opcodes, 37, i);
 }
 
+uint32_t sll(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
+    return R_TYPE(argVec, opcodes, 0, i);
+}
+
 uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, $s};
     return R_TYPE(argVec, opcodes, 4, i);
 }
 
+uint32_t slt(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 42, i);
+}
 
+uint32_t sltu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 43, i);
+}
+
+//*********************************** I TYPE ************************************
 
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     uint32_t returnNum =((8 << 26) & 0xFC000000);
