@@ -57,7 +57,11 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
     std::string inComm;
     unsigned int count = 0x10000000;
 
-    while(inComm != "terminate") {
+    std::vector<std::string> terminateVec1 = {"jr", "$0"};
+    std::vector<std::string> terminateVec2 = {"jr", "$zero"};
+    std::vector<std::string> inVec;
+
+    while(inVec != terminateVec1 && inVec != terminateVec2) {
         inStream >> inComm;
         if (inComm == "terminate")
             break;
@@ -67,7 +71,6 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
         } else if (commMap.find(inComm) == commMap.end())
             exitError("Invalid command \"" + inComm + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
         else {
-            std::vector<std::string> inVec;
             inVec.push_back(inComm);
             for(int i = 0; i < commMap[inComm].numArgs; ++i) {
                 std::string arg;
