@@ -97,11 +97,12 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
 bool validIntStr(std::string arg, uint32_t& returnVal){
     std::size_t pos;
     returnVal = std::stoi(arg, &pos,0);
-    if(pos < arg.length()){
+    if(pos != arg.length()){
         return false;
     }
     return true;
 }
+
 //***************************** INSTRUCTIONS ***********************************
 
 uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
@@ -227,9 +228,19 @@ uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>
     uint32_t returnNum = ((2 << 26) & 0xFC000000);
     uint32_t addr;
     if (labelMap.find(argVec[1]) == labelMap.end()) {
-        std::size_t strCheck = 0;
-        addr = std::stoi(argVec[1], &strCheck);
-        if (strCheck != argVec[1].length())
+        if (!validIntStr(argVec[1], addr))
+            exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+    } else
+        addr = labelMap[argVec[1]];
+
+    return returnNum | (((addr) >> 2) & 0x3FFFFFF);
+}
+
+uint32_t jal(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    uint32_t returnNum = ((3 << 26) & 0xFC000000);
+    uint32_t addr;
+    if (labelMap.find(argVec[1]) == labelMap.end()) {
+        if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
     } else
         addr = labelMap[argVec[1]];

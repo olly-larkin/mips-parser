@@ -21,7 +21,8 @@ std::map<std::string, numFn> commMap = {
     {"addi", {3, addi}},
     
 
-    {"j", {1, j}}
+    {"j", {1, j}},
+    {"jal", {1, jal}}
 };
 
 std::map<std::string, unsigned int> labelMap;

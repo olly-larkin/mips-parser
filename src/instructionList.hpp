@@ -27,5 +27,6 @@ uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned i
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
+uint32_t jal(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
 #endif // INSTRUCTIONLIST_HPP
