@@ -31,6 +31,8 @@ std::map<std::string, numFn> commMap = {
 
     {"addi", {3, addi}},
     {"addiu", {3,addiu}},
+    {"andi", {3,andi}},
+    {"bgez", {2,bgez}},
     
 
     {"j", {1, j}},

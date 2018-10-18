@@ -46,6 +46,8 @@ uint32_t xor_instr(std::vector<std::string>& argVec, int i);
 
 uint32_t addi(std::vector<std::string>& argVec, int i);
 uint32_t addiu(std::vector<std::string>& argVec, int i);
+uint32_t andi(std::vector<std::string>& argVec, int i);
+uint32_t bgez(std::vector<std::string>& argVec, int i);
 
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);

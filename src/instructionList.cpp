@@ -290,6 +290,16 @@ uint32_t addiu(std::vector<std::string>& argVec, int i){
     return I_TYPE(argVec, opcodes, 9, i);
 }
 
+uint32_t andi(std::vector<std::string>& argVec, int i){
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 10, i);
+}
+
+uint32_t bgez(std::vector<std::string>& argVec, int i){
+    std::vector<OP_TYPE> opcodes = {$t, imm};
+    return I_TYPE(argVec, opcodes, 1, i) | (1 << 16);
+}
+
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
