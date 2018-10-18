@@ -25,6 +25,8 @@ std::map<std::string, numFn> commMap = {
     {"srl", {3, srl}},
     {"srlv", {3, srlv}},
     {"sub", {3, sub}},
+    {"subu", {3, subu}},
+    {"xor", {3, xor_instr}},
 
 
     {"addi", {3, addi}},

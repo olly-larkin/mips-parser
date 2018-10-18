@@ -235,6 +235,16 @@ uint32_t sub(std::vector<std::string>& argVec, std::map<std::string, unsigned in
     return R_TYPE(argVec, opcodes, 34, i);
 }
 
+uint32_t subu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 35, i);
+}
+
+uint32_t xor_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 38, i);
+}
+
 //*********************************** I TYPE ************************************
 
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
