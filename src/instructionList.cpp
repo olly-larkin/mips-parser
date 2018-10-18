@@ -285,9 +285,14 @@ uint32_t addi(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 8, i);
 }
 
-uint32_t addiu(std::vector<std::string>& argVec, int i){
+uint32_t addiu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$t, $s, imm};
     return I_TYPE(argVec, opcodes, 9, i);
+}
+
+uint32_t beq(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 4, i, true);
 }
 
 //*********************************** J TYPE ************************************
