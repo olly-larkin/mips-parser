@@ -71,6 +71,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
         } else if (commMap.find(inComm) == commMap.end())
             exitError("Invalid command \"" + inComm + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
         else {
+            inVec.clear();
             inVec.push_back(inComm);
             for(int i = 0; i < commMap[inComm].numArgs; ++i) {
                 std::string arg;
