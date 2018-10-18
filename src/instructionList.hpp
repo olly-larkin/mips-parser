@@ -36,7 +36,7 @@ uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned i
 uint32_t slt(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 uint32_t sltu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 uint32_t sra(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
-uint32_t srl(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i)
+uint32_t srl(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
 uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
 
