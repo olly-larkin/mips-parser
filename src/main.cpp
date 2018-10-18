@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "Please enter an output file name: ";
 	std::string outFileName;
 	std::cin >> outFileName;
-	std::ofstream outFile(outFileName, std::ios::binary | std::ios::beg);
+	std::ofstream outFile(outFileName, std::ios::binary);
 	binGen(outFile, commVector);
 
 	std::cout << "Output file generated: " << outFileName << std::endl << std::endl;
