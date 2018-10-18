@@ -297,7 +297,7 @@ uint32_t beq(std::vector<std::string>& argVec, int i) {
 
 uint32_t bgezal(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, imm};
-    return I_TYPE(argVec, opcodes, 1, i, true);
+    return I_TYPE(argVec, opcodes, 1, i, true) | (17 << 16);
 }
 
 //*********************************** J TYPE ************************************
