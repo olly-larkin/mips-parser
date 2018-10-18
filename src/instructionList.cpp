@@ -94,7 +94,7 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
     return true;
 }
 
-bool validIntStr(std::string arg, uint32_t& returnVal){
+bool validIntStr(std::string arg, int32_t& returnVal){
     std::size_t pos;
     returnVal = std::stoi(arg, &pos,0);
     if(pos != arg.length()){
@@ -103,130 +103,192 @@ bool validIntStr(std::string arg, uint32_t& returnVal){
     return true;
 }
 
-//***************************** INSTRUCTIONS ***********************************
-
-uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 32;
-    std::vector<int> index = {1,2,3};
+uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int i) {
+    uint32_t returnNum = fn;
+    std::vector<int> index;
+    for(int i = 0; i < opcodes.size(); ++i) {
+        if (opcodes[i] == $s || opcodes[i] == $t || opcodes[i] == $d)
+            index.push_back(i+1);
+    }
     if (!regCheck(argVec, index))
         exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
-    return returnNum & 0x3FFF83F;
-}
-
-uint32_t addu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 33;
-    std::vector<int> index = {1,2,3};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
-    return returnNum & 0x3FFF83F;
-}
-
-uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 36;
-    std::vector<int> index = {1,2,3};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
-    return returnNum & 0x3FFF83F;
-}
-
-uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 8;
-    std::vector<int> index = {1};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21);
-    return returnNum & 0x3E0003F;
-}
-
-uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 26;
-    std::vector<int> index = {1,2};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
-    return returnNum & 0x3FF003F;
-}
-
-uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 27;
-    std::vector<int> index = {1,2};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
-    return returnNum & 0x3FF003F;
-}
-
-uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 16;
-    std::vector<int> index = {1};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11);
-    return returnNum & 0xF83F;
-}
-
-uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 18;
-    std::vector<int> index = {1};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11);
-    return returnNum & 0xF83F;
-}
-
-uint32_t mult(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 24;
-    std::vector<int> index = {1,2};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
-    return returnNum & 0x3FF003F;
-}
-
-uint32_t multu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 25;
-    std::vector<int> index = {1,2};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 21) | ((regMap[argVec[2]] & 0x1F) << 16);
-    return returnNum & 0x3FF003F;
-}
-
-uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 37;
-    std::vector<int> index = {1,2,3};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[2]] & 0x1F) << 21) | ((regMap[argVec[3]] & 0x1F) << 16);
-    return returnNum & 0x3FFF83F;
-}
-
-uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum = 4;
-    std::vector<int> index = {1,2,3};
-    if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 11) | ((regMap[argVec[1]] & 0x1F) << 16) | ((regMap[argVec[1]] & 0x1F) << 21);
-    return returnNum & 0x3FFF83F;
-}
-
-uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    uint32_t returnNum =((8 << 26) & 0xFC000000),imm = 0;
-    std::vector<int> index = {1,2};
-    if(!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    if(!validIntStr(argVec[3], imm))
-        exitError("Invalid immediate input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    returnNum = returnNum | ((regMap[argVec[1]] & 0x1F) << 16) | ((regMap[argVec[2]] & 0x1F) << 21) | (imm & 0xFFFF);
+    for(int i = 0; i < opcodes.size(); ++i) {
+        switch(opcodes[i]) {
+            case shAmt:
+                int32_t shAmtNum;
+                if (!validIntStr(argVec[i+1], shAmtNum))
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                returnNum = returnNum | ((shAmtNum & 0x1F) << 6);
+                break;
+            case $d:
+                returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 11);
+                break;
+            case $t:
+                returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 16);
+                break;
+            case $s:
+                returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 21);
+                break;
+            default:
+                break;
+        }
+    }
     return returnNum;
 }
 
+uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int op, int i, bool branch) {
+    uint32_t returnNum = (op << 26) & 0xFC000000;
+    int32_t immediate = 0;
+    std::vector<int> index;
+    for(int i = 0; i < opcodes.size(); ++i) {
+        if (opcodes[i] == $s || opcodes[i] == $t || opcodes[i] == $d)
+            index.push_back(i+1);
+    }
+    if (!regCheck(argVec, index))
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+    for(int i = 0; i < opcodes.size(); ++i) {
+        switch(opcodes[i]) {
+            case imm:
+                if (!validIntStr(argVec[i+1], immediate))
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                if (branch)
+                    immediate = immediate >> 2;
+                returnNum = returnNum | (immediate & 0xFFFF);
+                break;
+            case $t:
+                returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 16);
+                break;
+            case $s:
+                returnNum = returnNum | ((regMap[argVec[i+1]] & 0x1F) << 21);
+                break;
+            default:
+                break;
+        }
+    }
+    return returnNum;
+}
+
+//***************************** INSTRUCTIONS ***********************************
+
+//*********************************** R TYPE ************************************
+
+uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 32, i);
+}
+
+uint32_t addu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 33, i);
+}
+
+uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 36, i);
+}
+
+uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, $t};
+    return R_TYPE(argVec, opcodes, 26, i);
+}
+
+uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, $t};
+    return R_TYPE(argVec, opcodes, 27, i);
+}
+
+uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s};
+    return R_TYPE(argVec, opcodes, 8, i);
+}
+
+uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d};
+    return R_TYPE(argVec, opcodes, 16, i);
+}
+
+uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d};
+    return R_TYPE(argVec, opcodes, 18, i);
+}
+
+uint32_t mult(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, $t};
+    return R_TYPE(argVec, opcodes, 24, i);
+}
+
+uint32_t multu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s, $t};
+    return R_TYPE(argVec, opcodes, 25, i);
+}
+
+uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 37, i);
+}
+
+uint32_t sll(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
+    return R_TYPE(argVec, opcodes, 0, i);
+}
+
+uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, $s};
+    return R_TYPE(argVec, opcodes, 4, i);
+}
+
+uint32_t slt(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 42, i);
+}
+
+uint32_t sltu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 43, i);
+}
+
+uint32_t sra(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
+    return R_TYPE(argVec, opcodes, 3, i);
+}
+
+uint32_t srl(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
+    return R_TYPE(argVec, opcodes, 2, i);
+}
+
+uint32_t srlv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, $s};
+    return R_TYPE(argVec, opcodes, 6, i);
+}
+
+uint32_t sub(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 34, i);
+}
+
+uint32_t subu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 35, i);
+}
+
+uint32_t xor_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $s, $t};
+    return R_TYPE(argVec, opcodes, 38, i);
+}
+
+//*********************************** I TYPE ************************************
+
+uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, $s, imm};
+    return I_TYPE(argVec, opcodes, 8, i);
+}
+
+//*********************************** J TYPE ************************************
+
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     uint32_t returnNum = ((2 << 26) & 0xFC000000);
-    uint32_t addr;
+    int32_t addr;
     if (labelMap.find(argVec[1]) == labelMap.end()) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
@@ -238,7 +300,7 @@ uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>
 
 uint32_t jal(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     uint32_t returnNum = ((3 << 26) & 0xFC000000);
-    uint32_t addr;
+    int32_t addr;
     if (labelMap.find(argVec[1]) == labelMap.end()) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));

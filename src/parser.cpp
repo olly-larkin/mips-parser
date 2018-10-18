@@ -10,14 +10,25 @@ std::map<std::string, numFn> commMap = {
     {"add", {3, add}},
     {"addu", {3, addu}},
     {"and", {3, and_instr}},
-    {"jr", {1, jr}},
     {"div", {2, div_instr}},
     {"divu", {2, divu}},
+    {"jr", {1, jr}},
     {"mfhi", {1, mfhi}},
     {"mflo", {1, mflo}},
     {"mult", {2, mult}},
     {"or", {3, or_instr}},
+    {"sll", {3, sll}},
     {"sllv", {3, sllv}},
+    {"slt", {3, slt}},
+    {"sltu", {3, sltu}},
+    {"sra", {3, sra}},
+    {"srl", {3, srl}},
+    {"srlv", {3, srlv}},
+    {"sub", {3, sub}},
+    {"subu", {3, subu}},
+    {"xor", {3, xor_instr}},
+
+
     {"addi", {3, addi}},
     
 
