@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 
-typedef uint32_t (*commandFn)(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i);
+typedef uint32_t (*commandFn)(std::vector<std::string>& argVec, int i);
 
 struct numFn {
     int numArgs;
@@ -15,5 +15,6 @@ struct numFn {
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector);
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector);
 void fillMem(char memBlock[4], uint32_t num);
+bool labelReturn(std::string str, int32_t& addr);
 
 #endif  //PARSER_HPP

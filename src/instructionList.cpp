@@ -3,6 +3,7 @@
 #include "instructionList.hpp"
 #include <map>
 #include <string>
+#include "parser.hpp"
 
 std::map<std::string, uint32_t> regMap = {
     {"$zero", 0},
@@ -172,145 +173,141 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
 
 //*********************************** R TYPE ************************************
 
-uint32_t add(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t add(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 32, i);
 }
 
-uint32_t addu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t addu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 33, i);
 }
 
-uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t and_instr(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 36, i);
 }
 
-uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t div_instr(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 26, i);
 }
 
-uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t divu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 27, i);
 }
 
-uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t jr(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s};
     return R_TYPE(argVec, opcodes, 8, i);
 }
 
-uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t mfhi(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d};
     return R_TYPE(argVec, opcodes, 16, i);
 }
 
-uint32_t mflo(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t mflo(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d};
     return R_TYPE(argVec, opcodes, 18, i);
 }
 
-uint32_t mult(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t mult(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 24, i);
 }
 
-uint32_t multu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t multu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 25, i);
 }
 
-uint32_t or_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t or_instr(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 37, i);
 }
 
-uint32_t sll(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t sll(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
     return R_TYPE(argVec, opcodes, 0, i);
 }
 
-uint32_t sllv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t sllv(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, $s};
     return R_TYPE(argVec, opcodes, 4, i);
 }
 
-uint32_t slt(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t slt(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 42, i);
 }
 
-uint32_t sltu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t sltu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 43, i);
 }
 
-uint32_t sra(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t sra(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
     return R_TYPE(argVec, opcodes, 3, i);
 }
 
-uint32_t srl(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t srl(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
     return R_TYPE(argVec, opcodes, 2, i);
 }
 
-uint32_t srlv(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t srlv(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, $s};
     return R_TYPE(argVec, opcodes, 6, i);
 }
 
-uint32_t sub(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t sub(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 34, i);
 }
 
-uint32_t subu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t subu(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 35, i);
 }
 
-uint32_t xor_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t xor_instr(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 38, i);
 }
 
 //*********************************** I TYPE ************************************
 
-uint32_t addi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t addi(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$t, $s, imm};
     return I_TYPE(argVec, opcodes, 8, i);
 }
 
-uint32_t addiu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i){
+uint32_t addiu(std::vector<std::string>& argVec, int i){
     std::vector<OP_TYPE> opcodes = {$t, $s, imm};
     return I_TYPE(argVec, opcodes, 9, i);
 }
 
 //*********************************** J TYPE ************************************
 
-uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t j(std::vector<std::string>& argVec, int i) {
     uint32_t returnNum = ((2 << 26) & 0xFC000000);
     int32_t addr;
-    if (labelMap.find(argVec[1]) == labelMap.end()) {
+    if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    } else
-        addr = labelMap[argVec[1]];
-
+    }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
 
-uint32_t jal(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+uint32_t jal(std::vector<std::string>& argVec, int i) {
     uint32_t returnNum = ((3 << 26) & 0xFC000000);
     int32_t addr;
-    if (labelMap.find(argVec[1]) == labelMap.end()) {
+    if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    } else
-        addr = labelMap[argVec[1]];
-
+    }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
