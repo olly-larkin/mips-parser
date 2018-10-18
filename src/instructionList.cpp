@@ -381,6 +381,51 @@ uint32_t lb(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 32, i);
 }
 
+uint32_t lbu(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 36, i);
+}
+
+uint32_t lh(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 33, i);
+}
+
+uint32_t lhu(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 37, i);
+}
+
+uint32_t lui(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, imm};
+    return I_TYPE(argVec, opcodes, 15, i);
+}
+
+uint32_t lw(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 35, i);
+}
+
+uint32_t lwl(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 34, i);
+}
+
+uint32_t lwr(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 38, i);
+}
+
+uint32_t sb(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 40, i);
+}
+
+uint32_t sh(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 41, i);
+}
+
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
