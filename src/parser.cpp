@@ -81,3 +81,10 @@ void fillMem(char memBlock[4], uint32_t num) {
     memBlock[2] = ((num >> 8) & 0xFF);
     memBlock[3] = (num & 0xFF);
 }
+
+bool labelReturn(std::string str, int32_t& addr) {
+    if (labelMap.find(str) == labelMap.end())
+        return false;
+    addr = labelMap[str];
+    return true;
+}

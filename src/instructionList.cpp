@@ -3,6 +3,7 @@
 #include "instructionList.hpp"
 #include <map>
 #include <string>
+#include "parser.hpp"
 
 std::map<std::string, uint32_t> regMap = {
     {"$zero", 0},
@@ -294,23 +295,19 @@ uint32_t addiu(std::vector<std::string>& argVec, std::map<std::string, unsigned 
 uint32_t j(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     uint32_t returnNum = ((2 << 26) & 0xFC000000);
     int32_t addr;
-    if (labelMap.find(argVec[1]) == labelMap.end()) {
+    if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    } else
-        addr = labelMap[argVec[1]];
-
+    }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
 
 uint32_t jal(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     uint32_t returnNum = ((3 << 26) & 0xFC000000);
     int32_t addr;
-    if (labelMap.find(argVec[1]) == labelMap.end()) {
+    if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
             exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
-    } else
-        addr = labelMap[argVec[1]];
-
+    }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
