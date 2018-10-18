@@ -155,11 +155,6 @@ uint32_t and_instr(std::vector<std::string>& argVec, std::map<std::string, unsig
     return R_TYPE(argVec, opcodes, 36, i);
 }
 
-uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
-    std::vector<OP_TYPE> opcodes = {$s};
-    return R_TYPE(argVec, opcodes, 8, i);
-}
-
 uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 26, i);
@@ -168,6 +163,11 @@ uint32_t div_instr(std::vector<std::string>& argVec, std::map<std::string, unsig
 uint32_t divu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 27, i);
+}
+
+uint32_t jr(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$s};
+    return R_TYPE(argVec, opcodes, 8, i);
 }
 
 uint32_t mfhi(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
