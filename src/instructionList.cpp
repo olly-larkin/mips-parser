@@ -117,7 +117,7 @@ uint32_t R_TYPE(std::vector<std::string>& argVec, std::vector<OP_TYPE> opcodes, 
             case shAmt:
                 int32_t shAmtNum;
                 if (!validIntStr(argVec[i+1], shAmtNum))
-                    exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
                 returnNum = returnNum | ((shAmtNum & 0x1F) << 6);
                 break;
             case $d:
@@ -213,6 +213,11 @@ uint32_t slt(std::vector<std::string>& argVec, std::map<std::string, unsigned in
 uint32_t sltu(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $s, $t};
     return R_TYPE(argVec, opcodes, 43, i);
+}
+
+uint32_t sra(std::vector<std::string>& argVec, std::map<std::string, unsigned int>& labelMap, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
+    return R_TYPE(argVec, opcodes, 3, i);
 }
 
 //*********************************** I TYPE ************************************
