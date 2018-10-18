@@ -10,7 +10,8 @@ enum OP_TYPE {
     $t,
     $d,
     shAmt,
-    imm
+    imm,
+    regmem
 };
 
 void exitError(std::string errMsg, int code = 0);
