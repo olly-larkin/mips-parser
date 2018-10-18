@@ -69,7 +69,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector) {
     for(int i = 0; i < commVector.size(); ++i) {
         char memBlock[4];
-        uint32_t val = commMap[commVector[i][0]].fn(commVector[i], labelMap, i);
+        uint32_t val = commMap[commVector[i][0]].fn(commVector[i], i);
         fillMem(memBlock, val);
         outStream.write(memBlock, 4);
     }
