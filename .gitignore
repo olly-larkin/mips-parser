@@ -8,3 +8,5 @@ mips.bin
 .vscode/settings.json
 testFile.txt
 mips2.bin
+input.txt
+output.txt
