@@ -60,7 +60,13 @@ std::map<std::string, numFn> commMap = {
     {"jal", {1, jal}}
 };
 
-std::map<std::string, unsigned int> labelMap;
+std::map<std::string, unsigned int> labelMap = {
+    {"ADDR_NULL", 0x0},
+    {"ADDR_INSTR", 0x10000000},
+    {"ADDR_DATA", 0x20000000},
+    {"ADDR_GETC", 0x30000000},
+    {"ADDR_PUTC", 0x30000004}
+};
 
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
