@@ -150,8 +150,10 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case imm:
-                if (!validIntStr(argVec[i+1], immediate))
-                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                if (!(branch && labelReturn(argVec[i+1], immediate))) {
+                    if (!validIntStr(argVec[i+1], immediate))
+                        exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                }
                 if (branch)
                     immediate = immediate >> 2;
                 returnNum = returnNum | (immediate & 0xFFFF);
