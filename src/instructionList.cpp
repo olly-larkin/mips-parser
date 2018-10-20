@@ -104,7 +104,7 @@ bool validIntStr(std::string arg, int32_t& returnVal){
     return true;
 }
 
-uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int i) {
+uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int pc) {
     uint32_t returnNum = fn;
     std::vector<int> index;
     for(int i = 0; i < opcodes.size(); ++i) {
@@ -112,13 +112,13 @@ uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             index.push_back(i+1);
     }
     if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case shAmt:
                 int32_t shAmtNum;
                 if (!validIntStr(argVec[i+1], shAmtNum))
-                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
                 returnNum = returnNum | ((shAmtNum & 0x1F) << 6);
                 break;
             case $d:
@@ -137,7 +137,7 @@ uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
     return returnNum;
 }
 
-uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int op, int i, bool branch) {
+uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int op, int pc, bool branch) {
     uint32_t returnNum = (op << 26) & 0xFC000000;
     int32_t immediate = 0;
     std::vector<int> index;
@@ -146,13 +146,15 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             index.push_back(i+1);
     }
     if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case imm:
-                if (!(branch && labelReturn(argVec[i+1], immediate))) {
+                if (branch && labelReturn(argVec[i+1], immediate)) {
+                    immediate = immediate - ((pc+1)*4 + 0x10000000);
+                } else {
                     if (!validIntStr(argVec[i+1], immediate))
-                        exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                        exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
                 }
                 if (branch)
                     immediate = immediate >> 2;
