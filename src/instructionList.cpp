@@ -313,7 +313,7 @@ uint32_t addiu(std::vector<std::string>& argVec, int i) {
 
 uint32_t andi(std::vector<std::string>& argVec, int i){
     std::vector<OP_TYPE> opcodes = {$t, $s, imm};
-    return I_TYPE(argVec, opcodes, 10, i);
+    return I_TYPE(argVec, opcodes, 12, i);
 }
 
 uint32_t beq(std::vector<std::string>& argVec, int i) {
