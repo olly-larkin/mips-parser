@@ -58,6 +58,7 @@ std::map<std::string, numFn> commMap = {
     {"lwr", {2, lwr}},
     {"sb", {2, sb}},
     {"sh", {2, sh}},
+    {"sw", {2, sw}},
 
 
     {"j", {1, j}},

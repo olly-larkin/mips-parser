@@ -74,6 +74,7 @@ uint32_t lwl(std::vector<std::string>& argVec, int i);
 uint32_t lwr(std::vector<std::string>& argVec, int i);
 uint32_t sb(std::vector<std::string>& argVec, int i);
 uint32_t sh(std::vector<std::string>& argVec, int i);
+uint32_t sw(std::vector<std::string>& argVec, int i);
 
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);

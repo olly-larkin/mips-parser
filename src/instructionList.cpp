@@ -445,6 +445,11 @@ uint32_t sh(std::vector<std::string>& argVec, int i) {
     return I_TYPE(argVec, opcodes, 41, i);
 }
 
+uint32_t sw(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$t, regMem};
+    return I_TYPE(argVec, opcodes, 43, i);
+}
+
 //*********************************** J TYPE ************************************
 
 uint32_t j(std::vector<std::string>& argVec, int i) {
