@@ -42,6 +42,7 @@ uint32_t sllv(std::vector<std::string>& argVec, int i);
 uint32_t slt(std::vector<std::string>& argVec, int i);
 uint32_t sltu(std::vector<std::string>& argVec, int i);
 uint32_t sra(std::vector<std::string>& argVec, int i);
+uint32_t srav(std::vector<std::string>& argVec, int i);
 uint32_t srl(std::vector<std::string>& argVec, int i);
 uint32_t srlv(std::vector<std::string>& argVec, int i);
 uint32_t sub(std::vector<std::string>& argVec, int i);

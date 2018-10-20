@@ -25,6 +25,7 @@ std::map<std::string, numFn> commMap = {
     {"slt", {3, slt}},
     {"sltu", {3, sltu}},
     {"sra", {3, sra}},
+    {"srav", {3, srav}},
     {"srl", {3, srl}},
     {"srlv", {3, srlv}},
     {"sub", {3, sub}},

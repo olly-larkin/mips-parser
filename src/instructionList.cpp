@@ -288,6 +288,11 @@ uint32_t sra(std::vector<std::string>& argVec, int i) {
     return R_TYPE(argVec, opcodes, 3, i);
 }
 
+uint32_t srav(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$d, $t, $s};
+    return R_TYPE(argVec, opcodes, 7, i);
+}
+
 uint32_t srl(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d, $t, shAmt};
     return R_TYPE(argVec, opcodes, 2, i);
