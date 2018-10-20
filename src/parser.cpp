@@ -18,6 +18,7 @@ std::map<std::string, numFn> commMap = {
     {"mthi", {1, mthi}},
     {"mtlo", {1, mtlo}},
     {"mult", {2, mult}},
+    {"multu", {2, multu}},
     {"or", {3, or_instr}},
     {"sll", {3, sll}},
     {"sllv", {3, sllv}},
