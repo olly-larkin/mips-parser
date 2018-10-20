@@ -238,6 +238,16 @@ uint32_t mflo(std::vector<std::string>& argVec, int i) {
     return R_TYPE(argVec, opcodes, 18, i);
 }
 
+uint32_t mthi(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$d};
+    return R_TYPE(argVec, opcodes, 17, i);
+}
+
+uint32_t mtlo(std::vector<std::string>& argVec, int i) {
+    std::vector<OP_TYPE> opcodes = {$d};
+    return R_TYPE(argVec, opcodes, 19, i);
+}
+
 uint32_t mult(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$s, $t};
     return R_TYPE(argVec, opcodes, 24, i);
