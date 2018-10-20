@@ -150,7 +150,7 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case imm:
-                if (branch && labelReturn(argVec[i+1], immediate)) {
+                if (labelReturn(argVec[i+1], immediate)) {
                     immediate = immediate - ((pc+1)*4 + 0x10000000);
                 } else {
                     if (!validIntStr(argVec[i+1], immediate))
