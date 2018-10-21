@@ -76,12 +76,10 @@ std::map<std::string, unsigned int> labelMap = {
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
     unsigned int count = 0x10000000;
-
-    std::vector<std::string> terminateVec1 = {"jr", "$0"};
-    std::vector<std::string> terminateVec2 = {"jr", "$zero"};
+    
     std::vector<std::string> inVec;
 
-    while(inVec != terminateVec1 && inVec != terminateVec2) {
+    while(1) {
         inStream >> inComm;
         if (inComm == "nop")
             break;
