@@ -79,4 +79,6 @@ uint32_t sw(std::vector<std::string>& argVec, int i);
 uint32_t j(std::vector<std::string>& argVec, int i);
 uint32_t jal(std::vector<std::string>& argVec, int i);
 
+uint32_t nop(std::vector<std::string>& argVec, int i);
+
 #endif // INSTRUCTIONLIST_HPP

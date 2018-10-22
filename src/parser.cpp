@@ -62,7 +62,9 @@ std::map<std::string, numFn> commMap = {
 
 
     {"j", {1, j}},
-    {"jal", {1, jal}}
+    {"jal", {1, jal}},
+
+    {"nop", {0, nop}}
 };
 
 std::map<std::string, unsigned int> labelMap = {
@@ -81,7 +83,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
 
     while(1) {
         inStream >> inComm;
-        if (inComm == "nop")
+        if (inComm == "exit")
             break;
         else if (inComm.back() == ':') {
             inComm.pop_back();

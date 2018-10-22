@@ -8,7 +8,7 @@ Instructions
 
 If you are using a UNIX bases system (i.e. Linux or MacOS) you can simply cd into the directory of .cpp file and use the "make parser" command to build and then "bin/parser" to run it. Windows systems are a bit more tricky, but if you have installed g++ onto your computer you may also have the "make" command already available.  
 
-The application will convert assembly code into machine binary, pretty much synonmous with coding in VisUAL, except you're using MIPS instead of ARM. In case of an error, i.e. entering the wrong number of operands for a given instruction, the program will tell you the instruction at fault. You have the choice of using a text file or console input line by line, both of which require the instruction set to end in "nop". This will terminate input. Comments don't work and will return an error (pls don't use them).  
+The application will convert assembly code into machine binary, pretty much synonmous with coding in VisUAL, except you're using MIPS instead of ARM. In case of an error, i.e. entering the wrong number of operands for a given instruction, the program will tell you the instruction at fault. You have the choice of using a text file or console input line by line, both of which require the instruction set to end in "exit". This will terminate input. Comments don't work and will return an error (pls don't use them).  
 
 Example input:
 --------------  
@@ -38,5 +38,5 @@ A78A0000
 Footnote
 --------
 
-Pretty sure at the moment that "jr $zero" is how the binaries should terminate but will update if this isn't the case.  
+"nop" is a valid command in this parser and may be used after a jump or branch to implement a branch delay.
 Sorry if there are any bugs, raise an issue or just come tell us thx.

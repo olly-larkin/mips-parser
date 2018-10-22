@@ -471,3 +471,9 @@ uint32_t jal(std::vector<std::string>& argVec, int i) {
     }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
+
+//*********************************** NOP **************************************
+
+uint32_t nop(std::vector<std::string>& argVec, int i) {
+    return 0;
+}
