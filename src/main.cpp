@@ -30,8 +30,10 @@ int main(int argc, char* argv[]) {
 	if (argc == 1) {
 		std::cout << "Please enter an output file name: ";
 		std::cin >> outFileName;
-	} else {
+	} else if (argc == 2) {
 		outFileName = deleteFromEnd(argv[1], 4) + ".bin";
+	} else {
+		outFileName = argv[2];
 	}
 	std::ofstream outFile(outFileName, std::ios::binary);
 	binGen(outFile, commVector);
