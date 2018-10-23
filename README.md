@@ -44,5 +44,5 @@ A78A0000
 Footnote
 --------
 
-"nop" is a valid command in this parser and may be used after a jump or branch to implement a branch delay.
+"nop" is a valid command in this parser and may be used after a jump or branch to implement a branch delay.  
 Sorry if there are any bugs, raise an issue or just come tell us thx.
