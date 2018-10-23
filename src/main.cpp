@@ -27,15 +27,21 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl << "Commands passed successfully." << std::endl;
 
 	std::string outFileName;
-	if (argc == 1) {
+	if (argc == 2) {
+		outFileName = deleteFromEnd(argv[1], 4) + ".bin";
+	} else if (argc == 3) {
+		outFileName = argv[2];
+	} else if (argc == 4 && strncmp(argv[3], "prefix", 6) == 0) {
+		outFileName = argv[2] + deleteFromEnd(argv[1], 4) + ".bin";
+	} else {
 		std::cout << "Please enter an output file name: ";
 		std::cin >> outFileName;
-	} else if (argc == 2) {
-		outFileName = deleteFromEnd(argv[1], 4) + ".bin";
-	} else {
-		outFileName = argv[2];
 	}
 	std::ofstream outFile(outFileName, std::ios::binary);
+	if (!outFile.is_open()) {
+		std::cout << "Unable to generate output file." << std::endl << std::endl;
+		std::exit(0);
+	}
 	binGen(outFile, commVector);
 	outFile.close();
 

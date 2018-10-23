@@ -10,7 +10,7 @@ If you are using a UNIX bases system (i.e. Linux or MacOS) you can simply cd int
 
 The application will convert assembly code into machine binary, pretty much synonmous with coding in VisUAL, except you're using MIPS instead of ARM. In case of an error, i.e. entering the wrong number of operands for a given instruction, the program will tell you the instruction at fault.   
 
-You have the choice of using a text file or console input line by line. If you wish to use a file, please pass it in as an initial argument. In this case the generated binary will have the same name as the input .txt file (obviously with .bin instead of .txt). If you want to chose the output file name, you can pass it as the second intial argument.  
+You have the choice of using a text file or console input line by line. If you wish to use a file, please pass it in as an initial argument. In this case the generated binary will have the same name as the input .txt file (obviously with .bin instead of .txt). If you want to chose the output file name, you can pass it as the second intial argument. If "prefix" is passed as a 3rd argument, the 2nd argument will be a prefix to the default file name.  
 
 If using the console, exit input by using the command "exit". You will then be able to name the .bin file.
 
