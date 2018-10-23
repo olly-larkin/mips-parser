@@ -82,8 +82,7 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
     std::vector<std::string> inVec;
 
     while(1) {
-        inStream >> inComm;
-        if (inComm == "exit")
+        if (!(inStream >> inComm) || inComm == "exit")
             break;
         else if (inComm.back() == ':') {
             inComm.pop_back();
