@@ -3,9 +3,9 @@
 #include "parser.hpp"
 #include <vector>
 #include <string>
-#include <cstring>
 
 std::string deleteFromEnd(std::string str, int num);
+std::string formatName(std::string str);
 
 int main(int argc, char* argv[]) {
 
@@ -29,11 +29,9 @@ int main(int argc, char* argv[]) {
 
 	std::string outFileName;
 	if (argc == 2) {
-		outFileName = deleteFromEnd(argv[1], 4) + ".bin";
+		outFileName = formatName(argv[1]);
 	} else if (argc == 3) {
 		outFileName = argv[2];
-	} else if (argc == 4 && strncmp(argv[3], "prefix", 6) == 0) {
-		outFileName = argv[2] + deleteFromEnd(argv[1], 4) + ".bin";
 	} else {
 		std::cout << "Please enter an output file name: ";
 		std::cin >> outFileName;
@@ -49,9 +47,14 @@ int main(int argc, char* argv[]) {
 	std::cout << "Output file generated: " << outFileName << std::endl << std::endl;
 }
 
-std::string deleteFromEnd(std::string str, int num) {
-	for(int i = 0; i < num; ++i) {
-		str.pop_back();
+std::string formatName(std::string str) {
+	std::size_t dotIndex = str.size();
+	std::size_t slashIndex = -1;
+	for(int i = str.size()-1; i >= 0; --i) {
+		if (str[i] == '.' && dotIndex == str.size())
+			dotIndex = i;
+		if (str[i] == '/' && slashIndex == -1)
+			slashIndex = i;
 	}
-	return str;
+	return str.substr(slashIndex+1, (dotIndex - slashIndex - 1)) + ".bin";
 }
