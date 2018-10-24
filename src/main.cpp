@@ -3,6 +3,7 @@
 #include "parser.hpp"
 #include <vector>
 #include <string>
+#include <cstring>
 
 std::string deleteFromEnd(std::string str, int num);
 std::string formatName(std::string str);
@@ -27,12 +28,12 @@ int main(int argc, char* argv[]) {
 
 	std::cout << std::endl << "Commands passed successfully." << std::endl;
 
-	std::string outFileName;
-	if (argc == 2) {
-		outFileName = formatName(argv[1]);
-	} else if (argc == 3) {
+	std::string outFileName = formatName(argv[1]);
+	if (argc == 3) {
 		outFileName = argv[2];
-	} else {
+	} else if (argc == 4 && std::strncmp(argv[3], "prefix", 6) == 0) {
+		outFileName = argv[2] + outFileName;
+	} else if (argc == 1) {
 		std::cout << "Please enter an output file name: ";
 		std::cin >> outFileName;
 	}
