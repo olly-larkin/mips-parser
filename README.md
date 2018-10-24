@@ -14,7 +14,7 @@ You have the choice of using a text file or console input line by line. If you w
 
 If using the console, exit input by using the command "exit". You will then be able to name the .bin file.
 
-Comments don't work and will return an error (pls don't use them).  
+Comments have now been implemented. Only single line comments for now... Use the '#' character.    
 
 Example input:
 --------------  
