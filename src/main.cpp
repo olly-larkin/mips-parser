@@ -13,6 +13,9 @@ int main(int argc, char* argv[]) {
 	std::cout << std::endl;
 
 	if (argc == 1) {
+		std::cout << "------------------------------------- " << std::endl;
+		std::cout << "*********** CONSOLE INPUT *********** " << std::endl;
+		std::cout << "------------------------------------- " << std::endl << std::endl;
 		vecParser(std::cin, commVector);
 	} else {
 		std::string inFileName = argv[1];
