@@ -84,7 +84,10 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
     while(1) {
         if (!(inStream >> inComm) || inComm == "exit")
             break;
-        else if (inComm.back() == ':') {
+        else if (inComm[0] == '#') {
+            std::string throwAway;
+            getline(inStream, throwAway);
+        } else if (inComm.back() == ':') {
             inComm.pop_back();
             labelMap[inComm] = count;
         } else if (commMap.find(inComm) == commMap.end())
