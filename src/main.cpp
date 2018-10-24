@@ -3,6 +3,7 @@
 #include "parser.hpp"
 #include <vector>
 #include <string>
+#include <cstring>
 
 std::string deleteFromEnd(std::string str, int num);
 
