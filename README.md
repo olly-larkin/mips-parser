@@ -17,11 +17,11 @@ If using the console, exit input by using the command "exit". You will then be a
 Comments have now been implemented. Only single line comments for now... Use the '#' character.    
 
 <b>The parser can take two intial arguments:    </b>
-<menu>
-<menuitem label="Arg 1">If passed, this argument should be the name of a text file containing mips instructions (as shown below) - this will name the output file by default to the name of the input file (without the file path or .txt extension).   </menuitem>  
+<ol>
+<li>If passed, this argument should be the name of a text file containing mips instructions (as shown below) - this will name the output file by default to the name of the input file (without the file path or .txt extension).   </li>  
 
-<menuitem label="Arg 2">If passed, this argument should be the name of the output file. This only needs to be used if you do not want the default naming system. If this argument ends in the '#' character, then it will become a prefix to the default name. For example, if "binaries/#" was passed as the second argument, the output file name would be the default name with the file path of "binaries/". An example is given below.   </menuitem>
-</menu>
+<li>If passed, this argument should be the name of the output file. This only needs to be used if you do not want the default naming system. If this argument ends in the '#' character, then it will become a prefix to the default name. For example, if "binaries/#" was passed as the second argument, the output file name would be the default name with the file path of "binaries/". An example is given below.   </li>
+</ol>
 
 Example input:
 --------------  
