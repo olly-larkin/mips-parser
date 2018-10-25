@@ -16,7 +16,7 @@ If using the console, exit input by using the command "exit". You will then be a
 
 Comments have now been implemented. Only single line comments for now... Use the '#' character.    
 
-<b>The parser can take two intial arguments:    </b>read
+<b>The parser can take two intial arguments:    </b>
 
 Arg 1: If passed, this argument should be the name of a text file containing mips instructions (as shown below) - this will name the output file by default to the name of the input file (without the file path or .txt extension).     
 
