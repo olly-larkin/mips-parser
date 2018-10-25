@@ -43,7 +43,27 @@ This will generate the binary shown below:
 A78A0000   
 00000008  
 
-(It is left as an exercise to prove that this is the correct binary)  
+(It is left as an exercise to prove that this is the correct binary) 
+
+Example batch parsing:
+------------------------  
+
+Assume that a folder called "text_files/" exists in the working directory and contains all of the .txt files that you wish to compile. Also assume that a folder named "binaries/" exists in the working directory. The bash script below will compile all of the .txt files and output them into the "binaries" folder.
+
+<pre>
+
+#!/bin/bash
+
+FILES="text_files/*"
+
+for F in $FILES
+do
+    bin/parser $F "binaries/#"
+done
+
+echo -e "Finished.\n"
+
+</pre>
 
 Footnote
 --------
