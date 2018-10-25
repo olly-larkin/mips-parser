@@ -11,4 +11,4 @@ instructionList.o: src/instructionList.cpp src/instructionList.hpp
 	g++ --std=c++11 -c src/instructionList.cpp -o src/instructionList.o
 
 clean:
-	rm src/*.o bin/parser
+	rm -f src/*.o bin/parser
