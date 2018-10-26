@@ -228,6 +228,11 @@ uint32_t jr(std::vector<std::string>& argVec, int i) {
     return R_TYPE(argVec, opcodes, 8, i);
 }
 
+uint32_t jalr(std::vector<std::string>& argVec, int i){
+    std::vector<OP_TYPE> opcodes = {$s};
+    return R_TYPE(argVec, opcodes, 8, i);
+}
+
 uint32_t mfhi(std::vector<std::string>& argVec, int i) {
     std::vector<OP_TYPE> opcodes = {$d};
     return R_TYPE(argVec, opcodes, 16, i);
