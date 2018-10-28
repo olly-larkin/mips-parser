@@ -21,7 +21,10 @@ Comments have now been implemented. Only single line comments for now... Use the
 <li>Arg 1: If passed, this argument should be the name of a text file containing mips instructions (as shown below) - this will name the output file by default to the name of the input file (without the file path or .txt extension).   </li>  
 
 <li>Arg 2: If passed, this argument should be the name of the output file. This only needs to be used if you do not want the default naming system. If this argument ends in the '#' character, then it will become a prefix to the default name. For example, if "binaries/#" was passed as the second argument, the output file name would be the default name with the file path of "binaries/". An example is given below.   </li>
-</ul>
+</ul>  
+
+<b> JALR is a special case: </b>  
+This instruction has 2 arguments, the first of which is optional and defaults to $ra/$31. Due to the design of this program, it will not be able to support optional arguments, and therefore the "jalr" instruction should only be used with 2 argument, the first being the link register and the second the jump register.  
 
 Example input:
 --------------  
