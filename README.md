@@ -24,7 +24,9 @@ Comments have now been implemented. Only single line comments for now... Use the
 </ul>  
 
 <b> JALR is a special case: </b>  
-This instruction has 2 arguments, the first of which is optional and defaults to $ra/$31. Due to the design of this program, it will not be able to support optional arguments, and therefore the "jalr" instruction should always be used with 2 argument, the first being the link register and the second the jump register. (srsly it would be so much extra work to implement so just type "$31" or "$ra" it saves a lot of time for us).
+This instruction has 2 arguments, the first of which is optional and defaults to $ra/$31. Due to the design of this program, it will not be able to support optional arguments, and therefore the "jalr" instruction should always be used with 2 argument, the first being the link register and the second the jump register. (srsly it would be so much extra work to implement so just type "$31" or "$ra" it saves a lot of time for us).  
+
+A correct use of the jalr instruction would be: "jalr $31, $2".  
 
 Example input:
 --------------  
