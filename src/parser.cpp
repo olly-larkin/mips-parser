@@ -13,7 +13,7 @@ std::map<std::string, numFn> commMap = {
     {"div", {2, div_instr}},
     {"divu", {2, divu}},
     {"jr", {1, jr}},
-    {"jalr", {1,jalr}},
+    {"jalr", {2,jalr}},
     {"mfhi", {1, mfhi}},
     {"mflo", {1, mflo}},
     {"mthi", {1, mthi}},
