@@ -73,34 +73,66 @@ std::map<std::string, unsigned int> labelMap;
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
     unsigned int count = 0x10000000;
-    
-    std::vector<std::string> inVec;
 
     while(1) {
-        if (!(inStream >> inComm) || inComm == "exit")
+        if (!(inStream >> inComm) || !(addVec(inStream, commVector, count, inComm)))
             break;
-        else if (inComm[0] == '#') {
-            std::string throwAway;
-            getline(inStream, throwAway);
-        } else if (inComm.back() == ':') {
-            inComm.pop_back();
-            labelMap[inComm] = count;
-        } else if (commMap.find(inComm) == commMap.end())
-            exitError("Invalid command \"" + inComm + "\" around instruction number " + std::to_string((count - 0x10000000)/4 + 1));
-        else {
-            inVec.clear();
-            inVec.push_back(inComm);
-            for(int i = 0; i < commMap[inComm].numArgs; ++i) {
+    }
+}
+
+bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& commVector, unsigned int& count, std::string func) {
+    if (func == "exit")
+        return false;
+    else if (func[0] == '#') {
+        std::string throwAway;
+        getline(inStream, throwAway);
+    } else if (func.back() == ':') {
+        func.pop_back();
+        labelMap[func] = count;
+    } else if (commMap.find(func) == commMap.end())
+        exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
+    else {
+        std::vector<std::string> inVec;
+        if (func == "jalr") {
+            std::string arg1, arg2;
+            if (!(inStream >> arg1))
+                exitError("Not enough arguments for final instruction.");
+            if (!(inStream >> arg2)) {
+                inVec.push_back(func);
+                inVec.push_back("$31");
+                inVec.push_back(arg1);
+                commVector.push_back(inVec);
+                count += 4;
+                return true;
+            }
+            if (indRegCheck(arg2)) {
+                inVec.push_back(func);
+                inVec.push_back(arg1);
+                inVec.push_back(arg2);
+                commVector.push_back(inVec);
+                count += 4;
+                return true;
+            } else {
+                inVec.push_back(func);
+                inVec.push_back("$31");
+                inVec.push_back(arg1);
+                commVector.push_back(inVec);
+                count += 4;
+                return addVec(inStream, commVector, count, arg2);
+            }
+        } else {
+            inVec.push_back(func);
+            for(int i = 0; i < commMap[func].numArgs; ++i) {
                 std::string arg;
-                inStream >> arg;
-                if (arg == "exit")
-                    exitError("Invalid argument \"" + arg + "\" around instruction number " + std::to_string((count - 0x10000000)/4 + 1));
+                if (!(inStream >> arg))
+                    exitError("Not enough arguments for final instruction.");
                 inVec.push_back(arg);
             }
             commVector.push_back(inVec);
             count += 4;
         }
     }
+    return true;
 }
 
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector) {

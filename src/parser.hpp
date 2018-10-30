@@ -13,6 +13,7 @@ struct numFn {
 };
 
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector);
+bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& commVector, unsigned int& count, std::string func);
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector);
 void fillMem(char memBlock[4], uint32_t num);
 bool labelReturn(std::string str, int32_t& addr);
