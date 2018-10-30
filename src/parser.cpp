@@ -68,43 +68,42 @@ std::map<std::string, numFn> commMap = {
     {"nop", {0, nop}}
 };
 
-std::map<std::string, unsigned int> labelMap = {
-    {"ADDR_NULL", 0x0},
-    {"ADDR_INSTR", 0x10000000},
-    {"ADDR_DATA", 0x20000000},
-    {"ADDR_GETC", 0x30000000},
-    {"ADDR_PUTC", 0x30000004}
-};
+std::map<std::string, unsigned int> labelMap;
 
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
     unsigned int count = 0x10000000;
-    
-    std::vector<std::string> inVec;
 
     while(1) {
-        if (!(inStream >> inComm) || inComm == "exit")
+        if (!(inStream >> inComm) || !(addVec(inStream, commVector, count, inComm)))
             break;
-        else if (inComm[0] == '#') {
-            std::string throwAway;
-            getline(inStream, throwAway);
-        } else if (inComm.back() == ':') {
-            inComm.pop_back();
-            labelMap[inComm] = count;
-        } else if (commMap.find(inComm) == commMap.end())
-            exitError("Invalid command \"" + inComm + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
-        else {
-            inVec.clear();
-            inVec.push_back(inComm);
-            for(int i = 0; i < commMap[inComm].numArgs; ++i) {
-                std::string arg;
-                inStream >> arg;
-                inVec.push_back(arg);
-            }
-            commVector.push_back(inVec);
-            count += 4;
-        }
     }
+}
+
+bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& commVector, unsigned int& count, std::string func) {
+    std::vector<std::string> inVec;
+    if (func == "exit")
+        return false;
+    else if (func[0] == '#') {
+        std::string throwAway;
+        getline(inStream, throwAway);
+    } else if (func.back() == ':') {
+        func.pop_back();
+        labelMap[func] = count;
+    } else if (commMap.find(func) == commMap.end())
+        exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
+    else {
+        inVec.clear();
+        inVec.push_back(func);
+        for(int i = 0; i < commMap[func].numArgs; ++i) {
+            std::string arg;
+            inStream >> arg;
+            inVec.push_back(arg);
+        }
+        commVector.push_back(inVec);
+        count += 4;
+    }
+    return true;
 }
 
 void binGen(std::ofstream& outStream, std::vector< std::vector<std::string> >& commVector) {
