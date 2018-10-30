@@ -13,7 +13,7 @@ std::map<std::string, numFn> commMap = {
     {"div", {2, div_instr}},
     {"divu", {2, divu}},
     {"jr", {1, jr}},
-    {"jalr", {2,jalr}},
+    {"jalr", {1,jalr}},
     {"mfhi", {1, mfhi}},
     {"mflo", {1, mflo}},
     {"mthi", {1, mthi}},
@@ -68,7 +68,13 @@ std::map<std::string, numFn> commMap = {
     {"nop", {0, nop}}
 };
 
-std::map<std::string, unsigned int> labelMap;
+std::map<std::string, unsigned int> labelMap = {
+    {"ADDR_NULL", 0x0},
+    {"ADDR_INSTR", 0x10000000},
+    {"ADDR_DATA", 0x20000000},
+    {"ADDR_GETC", 0x30000000},
+    {"ADDR_PUTC", 0x30000004}
+};
 
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
@@ -86,15 +92,13 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
             inComm.pop_back();
             labelMap[inComm] = count;
         } else if (commMap.find(inComm) == commMap.end())
-            exitError("Invalid command \"" + inComm + "\" around instruction number " + std::to_string((count - 0x10000000)/4 + 1));
+            exitError("Invalid command \"" + inComm + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
         else {
             inVec.clear();
             inVec.push_back(inComm);
             for(int i = 0; i < commMap[inComm].numArgs; ++i) {
                 std::string arg;
                 inStream >> arg;
-                if (arg == "exit")
-                    exitError("Invalid argument \"" + arg + "\" around instruction number " + std::to_string((count - 0x10000000)/4 + 1));
                 inVec.push_back(arg);
             }
             commVector.push_back(inVec);
