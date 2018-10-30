@@ -1,4 +1,5 @@
 parser: main.o parser.o instructionList.o
+	mkdir -p bin
 	g++ src/main.o src/parser.o src/instructionList.o -o bin/parser
 
 main.o: src/main.cpp
