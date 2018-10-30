@@ -23,6 +23,8 @@ Comments have now been implemented. Only single line comments for now... Use the
 <li>Arg 2: If passed, this argument should be the name of the output file. This only needs to be used if you do not want the default naming system. If this argument ends in the '#' character, then it will become a prefix to the default name. For example, if "binaries/#" was passed as the second argument, the output file name would be the default name with the file path of "binaries/". An example is given below.   </li>
 </ul>  
 
+Any number can be entered using hex using the "0x" notation, but binary entry will not work so please avoid it.  
+
 Example input:
 --------------  
 
