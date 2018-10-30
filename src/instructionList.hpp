@@ -17,6 +17,7 @@ enum OP_TYPE {
 void exitError(std::string errMsg, int code = 0);
 std::string giveStr(std::vector<std::string> strVec);
 bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index);
+bool indRegCheck(std::string reg);
 bool validIntStr(std::string arg, int32_t& returnVal);
 uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int pc);
 uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int op, int pc, bool branch = false);

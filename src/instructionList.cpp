@@ -95,6 +95,12 @@ bool regCheck(std::vector<std::string>& argVec, const std::vector<int>& index) {
     return true;
 }
 
+bool indRegCheck(std::string reg) {
+    if (reg.back() == ',')
+        reg.pop_back();
+    return (regMap.find(reg) != regMap.end());
+}
+
 bool validIntStr(std::string arg, int32_t& returnVal){
     std::size_t pos;
     returnVal = std::stoi(arg, &pos,0);

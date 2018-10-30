@@ -81,7 +81,6 @@ void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& 
 }
 
 bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& commVector, unsigned int& count, std::string func) {
-    std::vector<std::string> inVec;
     if (func == "exit")
         return false;
     else if (func[0] == '#') {
@@ -93,15 +92,45 @@ bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& com
     } else if (commMap.find(func) == commMap.end())
         exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
     else {
-        inVec.clear();
-        inVec.push_back(func);
-        for(int i = 0; i < commMap[func].numArgs; ++i) {
-            std::string arg;
-            inStream >> arg;
-            inVec.push_back(arg);
+        std::vector<std::string> inVec;
+        if (func == "jalr") {
+            std::string arg1, arg2;
+            if (!(inStream >> arg1))
+                exitError("Not enough arguments for final instruction.");
+            if (!(inStream >> arg2)) {
+                inVec.push_back(func);
+                inVec.push_back("$31");
+                inVec.push_back(arg1);
+                commVector.push_back(inVec);
+                count += 4;
+                return true;
+            }
+            if (indRegCheck(arg2)) {
+                inVec.push_back(func);
+                inVec.push_back(arg1);
+                inVec.push_back(arg2);
+                commVector.push_back(inVec);
+                count += 4;
+                return true;
+            } else {
+                inVec.push_back(func);
+                inVec.push_back("$31");
+                inVec.push_back(arg1);
+                commVector.push_back(inVec);
+                count += 4;
+                return addVec(inStream, commVector, count, arg2);
+            }
+        } else {
+            inVec.push_back(func);
+            for(int i = 0; i < commMap[func].numArgs; ++i) {
+                std::string arg;
+                if (!(inStream >> arg))
+                    exitError("Not enough arguments for final instruction.");
+                inVec.push_back(arg);
+            }
+            commVector.push_back(inVec);
+            count += 4;
         }
-        commVector.push_back(inVec);
-        count += 4;
     }
     return true;
 }
