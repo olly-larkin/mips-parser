@@ -90,13 +90,13 @@ bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& com
         func.pop_back();
         labelMap[func] = count;
     } else if (commMap.find(func) == commMap.end())
-        exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1));
+        exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1), 5);
     else {
         std::vector<std::string> inVec;
         if (func == "jalr") {
             std::string arg1, arg2;
             if (!(inStream >> arg1))
-                exitError("Not enough arguments for final instruction.");
+                exitError("Not enough arguments for final instruction.", 5);
             if (!(inStream >> arg2)) {
                 inVec.push_back(func);
                 inVec.push_back("$31");
@@ -125,7 +125,7 @@ bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& com
             for(int i = 0; i < commMap[func].numArgs; ++i) {
                 std::string arg;
                 if (!(inStream >> arg))
-                    exitError("Not enough arguments for final instruction.");
+                    exitError("Not enough arguments for final instruction.", 5);
                 inVec.push_back(arg);
             }
             commVector.push_back(inVec);

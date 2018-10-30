@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 	std::ofstream outFile(outFileName, std::ios::binary);
 	if (!outFile.is_open()) {
 		std::cout << "Unable to generate output file." << std::endl << std::endl;
-		std::exit(0);
+		std::exit(5);
 	}
 	binGen(outFile, commVector);
 	outFile.close();
