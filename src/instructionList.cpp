@@ -118,13 +118,13 @@ uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             index.push_back(i+1);
     }
     if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1), 5);
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case shAmt:
                 int32_t shAmtNum;
                 if (!validIntStr(argVec[i+1], shAmtNum))
-                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1), 5);
                 returnNum = returnNum | ((shAmtNum & 0x1F) << 6);
                 break;
             case $d:
@@ -152,7 +152,7 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             index.push_back(i+1);
     }
     if (!regCheck(argVec, index))
-        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
+        exitError("Invalid register input \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1), 5);
     for(int i = 0; i < opcodes.size(); ++i) {
         switch(opcodes[i]) {
             case imm:
@@ -160,7 +160,7 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
                     immediate = immediate - ((pc+1)*4 + 0x10000000);
                 } else {
                     if (!validIntStr(argVec[i+1], immediate))
-                        exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1));
+                        exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(pc+1), 5);
                 }
                 if (branch)
                     immediate = immediate >> 2;
@@ -175,7 +175,7 @@ uint32_t I_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& op
             case regMem:
                 int offset, reg;
                 if (!regMemSeperator(argVec[i+1], offset, reg))
-                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+                    exitError("Invalid instruction argument \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1), 5);
                 returnNum = returnNum | (offset & 0xFFFF) | ((reg & 0x1F) << 21);
                 break;
             default:
@@ -468,7 +468,7 @@ uint32_t j(std::vector<std::string>& argVec, int i) {
     int32_t addr;
     if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
-            exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+            exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1), 5);
     }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
@@ -478,7 +478,7 @@ uint32_t jal(std::vector<std::string>& argVec, int i) {
     int32_t addr;
     if(!labelReturn(argVec[1], addr)) {
         if (!validIntStr(argVec[1], addr))
-            exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1));
+            exitError("Invalid address \"" + giveStr(argVec) + "\" on instruction number " + std::to_string(i+1), 5);
     }
     return returnNum | (((addr) >> 2) & 0x3FFFFFF);
 }
