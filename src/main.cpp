@@ -42,7 +42,6 @@ int main(int argc, char* argv[]) {
 			if (str.back() == '#') {
 				str.pop_back();
 				outFileName = str + outFileName;
-				std::cout << outFileName << std::endl;
 			} else
 				outFileName = argv[2];
 		}
