@@ -240,12 +240,12 @@ uint32_t jalr(std::vector<std::string>& argVec, int i){
 }
 
 uint32_t mfhi(std::vector<std::string>& argVec, int i) {
-    std::vector<OP_TYPE> opcodes = {$s};
+    std::vector<OP_TYPE> opcodes = {$d};
     return R_TYPE(argVec, opcodes, 16, i);
 }
 
 uint32_t mflo(std::vector<std::string>& argVec, int i) {
-    std::vector<OP_TYPE> opcodes = {$s};
+    std::vector<OP_TYPE> opcodes = {$d};
     return R_TYPE(argVec, opcodes, 18, i);
 }
 
