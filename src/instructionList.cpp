@@ -101,15 +101,6 @@ bool indRegCheck(std::string reg) {
     return (regMap.find(reg) != regMap.end());
 }
 
-bool validIntStr(std::string arg, int32_t& returnVal){
-    std::size_t pos;
-    returnVal = std::stoi(arg, &pos,0);
-    if(pos != arg.length()){
-        return false;
-    }
-    return true;
-}
-
 uint32_t R_TYPE(std::vector<std::string>& argVec, const std::vector<OP_TYPE>& opcodes, int fn, int pc) {
     uint32_t returnNum = fn;
     std::vector<int> index;

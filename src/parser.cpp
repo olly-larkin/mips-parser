@@ -70,6 +70,15 @@ std::map<std::string, numFn> commMap = {
 
 std::map<std::string, unsigned int> labelMap;
 
+bool validIntStr(std::string arg, int32_t& returnVal){
+    std::size_t pos;
+    returnVal = std::stoi(arg, &pos,0);
+    if(pos != arg.length()){
+        return false;
+    }
+    return true;
+}
+
 void vecParser(std::istream& inStream, std::vector< std::vector<std::string> >& commVector) {
     std::string inComm;
     unsigned int count = 0x10000000;
@@ -89,6 +98,14 @@ bool addVec(std::istream& inStream, std::vector< std::vector<std::string> >& com
     } else if (func.back() == ':') {
         func.pop_back();
         labelMap[func] = count;
+    } else if (func == "mnop") {
+        std::string numStr;
+        int32_t nopNum;
+        if (!(inStream >> numStr) || !validIntStr(numStr, nopNum) || nopNum < 0)
+            exitError("Invalid argument passed to mnop: " + numStr, 5);
+        for(int i = 0; i < nopNum; ++i) {
+            commVector.push_back(std::vector<std::string>(1, "nop"));
+        }
     } else if (commMap.find(func) == commMap.end())
         exitError("Invalid command \"" + func + "\" on instruction number " + std::to_string((count - 0x10000000)/4 + 1), 5);
     else {

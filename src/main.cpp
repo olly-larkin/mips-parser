@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 
-std::string deleteFromEnd(std::string str, int num);
 std::string formatName(std::string str);
 
 int main(int argc, char* argv[]) {
