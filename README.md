@@ -25,6 +25,8 @@ Comments have now been implemented. Only single line comments for now... Use the
 
 Any number can be entered using hex using the "0x" notation, but binary entry will not work so please avoid it.  
 
+As requested by Szymon, "mnop" has been added to the parser. This will create the specified number of "nop" instructions. For example, "mnop 5" would create 5 "nop" instructions and "mnop 0x10" would create 16 "nop" instructions.  
+
 Example input:
 --------------  
 
