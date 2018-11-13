@@ -9,30 +9,30 @@ std::string formatName(std::string str);
 int main(int argc, char* argv[]) {
 
 	std::vector< std::vector<std::string> > commVector;
-	std::cout << std::endl;
+	std::cerr << std::endl;
 
 	if (argc == 1) {
-		std::cout << "------------------------------------- " << std::endl;
-		std::cout << "*********** CONSOLE INPUT *********** " << std::endl;
-		std::cout << "------------------------------------- " << std::endl << std::endl;
+		std::cerr << "------------------------------------- " << std::endl;
+		std::cerr << "*********** CONSOLE INPUT *********** " << std::endl;
+		std::cerr << "------------------------------------- " << std::endl << std::endl;
 		vecParser(std::cin, commVector);
 	} else {
 		std::string inFileName = argv[1];
 		std::ifstream inFile(inFileName);
 		if (!inFile.is_open()) {
-			std::cout << "Unable to open file." << std::endl << std::endl;
+			std::cerr << "Unable to open file." << std::endl << std::endl;
 			std::exit(0);
 		}
 		vecParser(inFile, commVector);
 		inFile.close();
 	}
 
-	std::cout << std::endl << "Commands passed successfully." << std::endl;
+	std::cerr << std::endl << "Commands passed successfully." << std::endl;
 
 	std::string outFileName;
 	
 	if (argc == 1) {
-		std::cout << "Please enter an output file name: ";
+		std::cerr << "Please enter an output file name: ";
 		std::cin >> outFileName;
 	} else {
 		outFileName = formatName(argv[1]);
@@ -48,13 +48,13 @@ int main(int argc, char* argv[]) {
 
 	std::ofstream outFile(outFileName, std::ios::binary);
 	if (!outFile.is_open()) {
-		std::cout << "Unable to generate output file." << std::endl << std::endl;
+		std::cerr << "Unable to generate output file." << std::endl << std::endl;
 		std::exit(5);
 	}
 	binGen(outFile, commVector);
 	outFile.close();
 
-	std::cout << "Output file generated: " << outFileName << std::endl << std::endl;
+	std::cerr << "Output file generated: " << outFileName << std::endl << std::endl;
 }
 
 std::string formatName(std::string str) {
